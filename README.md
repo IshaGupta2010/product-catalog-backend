@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🛍️ Dynamic Product Catalog Web App
 
-## Getting Started
+A fully functional product catalog system built using **Next.js**, **Tailwind CSS**, and **Express.js**. It provides seamless product browsing, adding, and deletion capabilities along with support for multiple images per product.
 
-First, run the development server:
+## Features
 
-```bash
+- 🧩 Dynamic product grid layout with responsive design
+- 🔍 Live search functionality to filter products by title
+- ➕ Add new products with fields:
+  - Title
+  - Price
+  - Main image URL
+  - Description (optional)
+  - Rating (optional)
+  - Additional image URLs (optional array)
+- ❌ Delete products instantly from UI
+- ⚠️ Toast notifications using `react-toastify`
+- 🧠 Error handling for invalid form input and API failures
+
+## Tech Stack
+
+- **Frontend**: Next.js, React, Tailwind CSS
+- **Backend**: Express.js (with in-memory storage)
+- **Tools**: React Toastify, Fetch API
+
+## Project Structure
+
+project/
+├── backend/
+│ ├── index.js # Express server entry
+│ └── routes/
+│ └── products.js # Product API routes (GET, POST, DELETE)
+├── frontend/
+│ ├── components/
+│ │ ├── Header.jsx
+│ │ ├── AddProductDialog.jsx
+│ │ └── ProductGrid.jsx
+│ └── page.jsx # Main page rendering product grid
+
+## API Endpoints
+
+### `GET /api/products`
+Fetch all available products from the in-memory store.
+
+### `POST /api/products`
+Add a new product. Expected JSON body:
+
+```json
+{
+  "title": "Smartwatch",
+  "price": 199.99,
+  "image": "/images/smartwatch1.jpg",
+  "images": ["/images/smartwatch2.jpg", "/images/smartwatch3.jpg"],
+  "rating": 4,
+  "description": "Fitness tracking, message alerts, and sleep monitoring."
+}
+
+-title, price, and image are required.
+
+-images, description, and rating are optional.
+
+DELETE /api/products/:id
+Delete a product by ID. Returns success or error message.
+
+Setup Instructions
+
+Backend-
+
+cd backend
+npm install
+node index.js
+Runs server on http://localhost:5000
+
+Frontend-
+
+cd frontend
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Runs UI on http://localhost:3000
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Notes-
+-The backend uses an in-memory array, so data resets on server restart.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+-Use local image paths or public URLs for image fields.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+-Adding more than one image is supported via an array in the images field.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+-Main image is used for product cards; additional images can be used in sliders or modals.
