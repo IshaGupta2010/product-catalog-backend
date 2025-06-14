@@ -82,6 +82,20 @@ router.get('/', (req, res) => {
   res.json(products);
 });
 
+// const productId = 1;
+// const single = products.find(product => product.id === productId);
+
+// console.log(single);
+
+// router.get('/product/:id', (req, res) => {
+//   const productId = parseInt(req.params.id);
+//   const product = products.find(p => p.id === productId);
+
+//   if (product) {
+//     res.json(product);
+//   }
+// })
+
 // POST new product
 // 🔹 In routes/products.js — update the POST route:
 
